@@ -1,33 +1,43 @@
-#define eGLRB 7
-#define eDLRB 8
-#define eGSM 9
-#define eDSM 10
-#define eGLREa 11
-#define eDLREa 12
-#define eGLREb 13
-#define eDLREb 14
 
-#define eLRBS 15
-#define eSMS 16
-#define eLREaS 17
-#define eLREbS 18
+#define eGLRB 7       //
+#define eDLRB 8       //
+#define eGSM 9        //
+#define eDSM 10       //  Sound output
+#define eGLREa 11     //      pins
+#define eDLREa 12     //
+#define eGLREb 13     //
+#define eDLREb 14     //
 
-#define ledOne 19
-#define ledTwo 20
-#define ledThree 21
-#define ledFor 22
+#define eLRBS 15      //
+#define eSMS 16       //  Reading pins 
+#define eLREaS 17     //  speakers groups
+#define eLREbS 18     //
 
-#define signalOne 23
-#define signalTwo 24
-#define signalThree 25
-#define signalFor 26
+#define ledOne 19     //
+#define ledTwo 20     //  Pins LEDs 
+#define ledThree 21   //  speaakers groupes
+#define ledFor 22     //
+
+#define signalOne 23      //
+#define signalTwo 24      //  Pins reading
+#define signalThree 25    //  signal choice 
+#define signalFor 26      //
+
+#define cSignalOne 27     //
+#define cSignalTwo 28     //  Pins command
+#define cSignalThree 29   //  signal choice
+#define cSignalFor 30     //
 
 
+int bOne = 0;
+int bTwo = 0;
+int bThree = 0;
+int bFor = 0;
 
-int bUn = 0;
-int bDeux = 0;
-int bTrois = 0;
-int bQuatre = 0;
+int sOne = 0;
+int sTwo = 0;
+int sThree = 0;
+int sFor = 0;
 
 int sData;
 
@@ -52,10 +62,15 @@ void setup() {
   pinMode(ledThree, OUTPUT);
   pinMode(ledFor, OUTPUT);
 
-  pinMode(signalOne, OUTPUT);
-  pinMode(signalTwo, OUTPUT);
-  pinMode(signalThree, OUTPUT);
-  pinMode(signalFor, OUTPUT);
+  pinMode(signalOne, INPUT);
+  pinMode(signalTwo, INPUT);
+  pinMode(signalThree, INPUT);
+  pinMode(signalFor, INPUT);
+
+  pinMode(cSignalOne, OUTPUT);
+  pinMode(cSignalTwo, OUTPUT);
+  pinMode(cSignalThree, OUTPUT);
+  pinMode(cSignalFor, OUTPUT);
   
   Serial.begin(9600);
   
@@ -63,73 +78,88 @@ void setup() {
 
 void loop() {
 
+  speakersCom();
+  speakersGroup();
+
+}
+
+
+void speakersCom() {
+
   sData = Serial.read();
   
   if (((digitalRead(eLRBS)) == 0) or (sData == 1)) {
-    bUn = bUn + 1;
-    if (bUn == 2) {
-      bUn = 0;
+    bOne = bOne + 1;
+    if (bOne == 2) {
+      bOne = 0;
     }
   }
   if (((digitalRead(eSMS)) == 0) or (sData == 2)) {
-    bDeux = bDeux + 1;
-    if (bDeux == 2) {
-      bDeux = 0;
+    bTwo = bTwo + 1;
+    if (bTwo == 2) {
+      bTwo = 0;
     }
   }
   if (((digitalRead(eLREaS)) == 0) or (sData == 3)) {
-    bTrois = bTrois + 1;
-    if (bTrois == 2) {
-      bTrois = 0;
+    bThree = bThree + 1;
+    if (bThree == 2) {
+      bThree = 0;
     }
   }
   if (((digitalRead(eLREbS)) == 0) or (sData == 4)) {
-    bQuatre = bQuatre + 1;
-    if (bQuatre == 2) {
-      bQuatre = 0;
+    bFor = bFor + 1;
+    if (bFor == 2) {
+      bFor = 0;
     }
   }
 
-  if (bUn == 1) {
+  if (bOne == 1) {
     digitalWrite(eGLRB, HIGH);
     digitalWrite(eDLRB, HIGH);
     digitalWrite(ledOne, HIGH);
   }
-  if (bDeux == 1) {
+  if (bTwo == 1) {
     digitalWrite(eGSM, HIGH);
     digitalWrite(eDSM, HIGH);
     digitalWrite(ledTwo, HIGH);
   }
-  if (bTrois == 1) {
+  if (bThree == 1) {
     digitalWrite(eGLREa, HIGH);
     digitalWrite(eDLREa, HIGH);
     digitalWrite(ledThree, HIGH);
   }
-  if (bQuatre == 1) {
+  if (bFor == 1) {
     digitalWrite(eGLREb, HIGH);
     digitalWrite(eDLREb, HIGH);
     digitalWrite(ledFor, HIGH);
   }
 
-  if (bUn == 0) {
+  if (bOne == 0) {
     digitalWrite(eGLRB, LOW);
     digitalWrite(eDLRB, LOW);
     digitalWrite(ledOne, LOW);
   }
-  if (bDeux == 0) {
+  if (bTwo == 0) {
     digitalWrite(eGSM, LOW);
     digitalWrite(eDSM, LOW);
     digitalWrite(ledTwo, LOW);
   }
-  if (bTrois == 0) {
+  if (bThree == 0) {
     digitalWrite(eGLREa, LOW);
     digitalWrite(eDLREa, LOW);
     digitalWrite(ledThree, LOW);
   }
-  if (bQuatre == 0) {
+  if (bFor == 0) {
     digitalWrite(eGLREb, LOW);
     digitalWrite(eDLREb, LOW);
     digitalWrite(ledFor, LOW);
   }
+  
+}
+
+
+void speakersGroup() {
+
+  sData = Serial.read();
   
 }
