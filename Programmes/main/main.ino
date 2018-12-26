@@ -12,10 +12,10 @@
 #define eLREaS 17
 #define eLREbS 18
 
-#define ledUn 19
-#define ledDeux 20
-#define ledTrois 21
-#define ledQuatre 22
+#define ledOne 19
+#define ledTwo 20
+#define ledThree 21
+#define ledFor 22
 
 #define signalOne 23
 #define signalTwo 24
@@ -47,10 +47,10 @@ void setup() {
   pinMode(eLREaS, INPUT_PULLUP);
   pinMode(eLREbS, INPUT_PULLUP);
 
-  pinMode(ledUn, OUTPUT);
-  pinMode(ledDeux, OUTPUT);
-  pinMode(ledTrois, OUTPUT);
-  pinMode(ledQuatre, OUTPUT);
+  pinMode(ledOne, OUTPUT);
+  pinMode(ledTwo, OUTPUT);
+  pinMode(ledThree, OUTPUT);
+  pinMode(ledFor, OUTPUT);
 
   pinMode(signalOne, OUTPUT);
   pinMode(signalTwo, OUTPUT);
@@ -93,43 +93,43 @@ void loop() {
   if (bUn == 1) {
     digitalWrite(eGLRB, HIGH);
     digitalWrite(eDLRB, HIGH);
-    digitalWrite(ledUn, HIGH);
+    digitalWrite(ledOne, HIGH);
   }
   if (bDeux == 1) {
     digitalWrite(eGSM, HIGH);
     digitalWrite(eDSM, HIGH);
-    digitalWrite(ledDeux, HIGH);
+    digitalWrite(ledTwo, HIGH);
   }
   if (bTrois == 1) {
     digitalWrite(eGLREa, HIGH);
     digitalWrite(eDLREa, HIGH);
-    digitalWrite(ledTrois, HIGH);
+    digitalWrite(ledThree, HIGH);
   }
   if (bQuatre == 1) {
     digitalWrite(eGLREb, HIGH);
     digitalWrite(eDLREb, HIGH);
-    digitalWrite(ledQuatre, HIGH);
+    digitalWrite(ledFor, HIGH);
   }
 
   if (bUn == 0) {
     digitalWrite(eGLRB, LOW);
     digitalWrite(eDLRB, LOW);
-    digitalWrite(ledUn, LOW);
+    digitalWrite(ledOne, LOW);
   }
   if (bDeux == 0) {
     digitalWrite(eGSM, LOW);
     digitalWrite(eDSM, LOW);
-    digitalWrite(ledDeux, LOW);
+    digitalWrite(ledTwo, LOW);
   }
   if (bTrois == 0) {
     digitalWrite(eGLREa, LOW);
     digitalWrite(eDLREa, LOW);
-    digitalWrite(ledTrois, LOW);
+    digitalWrite(ledThree, LOW);
   }
   if (bQuatre == 0) {
     digitalWrite(eGLREb, LOW);
     digitalWrite(eDLREb, LOW);
-    digitalWrite(ledQuatre, LOW);
+    digitalWrite(ledFor, LOW);
   }
   
 }
