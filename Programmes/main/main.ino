@@ -17,10 +17,12 @@
 #define ledTrois 21
 #define ledQuatre 22
 
-#define dataInputUn 23
-#define dataInputDeux 24
-#define dataInputTrois 25
-#define dataInputQuatre 26
+#define signalOne 23
+#define signalTwo 24
+#define signalThree 25
+#define signalFor 26
+
+
 
 int bUn = 0;
 int bDeux = 0;
@@ -50,10 +52,10 @@ void setup() {
   pinMode(ledTrois, OUTPUT);
   pinMode(ledQuatre, OUTPUT);
 
-  pinMode(dataInputUn, OUTPUT);
-  pinMode(dataInputDeux, OUTPUT);
-  pinMode(dataInputTrois, OUTPUT);
-  pinMode(dataInputQuatre, OUTPUT);
+  pinMode(signalOne, OUTPUT);
+  pinMode(signalTwo, OUTPUT);
+  pinMode(signalThree, OUTPUT);
+  pinMode(signalFor, OUTPUT);
   
   Serial.begin(9600);
   
