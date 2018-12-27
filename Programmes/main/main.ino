@@ -1,54 +1,31 @@
-#define eGLRB 7       //
-#define eDLRB 8       //
-#define eGSM 9        //
-#define eDSM 10       //  Sound output
-#define eGLREa 11     //      pins
-#define eDLREa 12     //
-#define eGLREb 13     //
-#define eDLREb 14     //
+#define eGLRB 22       //
+#define eDLRB 23       //
+#define eGSM 24        //
+#define eDSM 25       //  Sound output
+#define eGLREa 26     //      pins
+#define eDLREa 27     //
+#define eGLREb 28     //
+#define eDLREb 29     //
 
-#define eLRBS 15      //
-#define eSMS 16       //  Reading pins 
-#define eLREaS 17     //  speakers groups
-#define eLREbS 18     //
+#define eLRBS 30      //
+#define eSMS 31       //  Reading pins 
+#define eLREaS 32     //  speakers groups
+#define eLREbS 33     //
 
-#define ledOne 19     //
-#define ledTwo 20     //  Pins LEDs 
-#define ledThree 21   //  speaakers groupes
-#define ledFor 22     //
-#define eGLRB 22
-#define eDLRB 23
-#define eGSM 24
-#define eDSM 25
-#define eGLREa 26
-#define eDLREa 27
-#define eGLREb 28
-#define eDLREb 29
+#define ledOne 34     //
+#define ledTwo 35     //  Pins LEDs 
+#define ledThree 36   //  speaakers groupes
+#define ledFor 37     //
 
-#define eLRBS 30
-#define eSMS 31
-#define eLREaS 32
-#define eLREbS 33
+#define signalOne 38      //
+#define signalTwo 39      //  Pins reading
+#define signalThree 40    //  signal choice 
+#define signalFor 41      //
 
-#define ledUn 34
-#define ledDeux 35
-#define ledTrois 36
-#define ledQuatre 37
-
-#define signalOne 38
-#define signalTwo 39
-#define signalThree 40
-#define signalFor 41
-
-#define signalOne 23      //
-#define signalTwo 24      //  Pins reading
-#define signalThree 25    //  signal choice 
-#define signalFor 26      //
-
-#define cSignalOne 27     //
-#define cSignalTwo 28     //  Pins command
-#define cSignalThree 29   //  signal choice
-#define cSignalFor 30     //
+#define cSignalOne 42     //
+#define cSignalTwo 43     //  Pins command
+#define cSignalThree 44   //  signal choice
+#define cSignalFor 45     //
 
 
 int bOne = 0;
