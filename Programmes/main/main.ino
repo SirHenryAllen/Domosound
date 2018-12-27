@@ -1,4 +1,3 @@
-
 #define eGLRB 7       //
 #define eDLRB 8       //
 #define eGSM 9        //
@@ -17,6 +16,29 @@
 #define ledTwo 20     //  Pins LEDs 
 #define ledThree 21   //  speaakers groupes
 #define ledFor 22     //
+#define eGLRB 22
+#define eDLRB 23
+#define eGSM 24
+#define eDSM 25
+#define eGLREa 26
+#define eDLREa 27
+#define eGLREb 28
+#define eDLREb 29
+
+#define eLRBS 30
+#define eSMS 31
+#define eLREaS 32
+#define eLREbS 33
+
+#define ledUn 34
+#define ledDeux 35
+#define ledTrois 36
+#define ledQuatre 37
+
+#define signalOne 38
+#define signalTwo 39
+#define signalThree 40
+#define signalFor 41
 
 #define signalOne 23      //
 #define signalTwo 24      //  Pins reading
