@@ -1,26 +1,26 @@
-#define eGLRB 7
-#define eDLRB 8
-#define eGSM 9
-#define eDSM 10
-#define eGLREa 11
-#define eDLREa 12
-#define eGLREb 13
-#define eDLREb 14
+#define eGLRB 22
+#define eDLRB 23
+#define eGSM 24
+#define eDSM 25
+#define eGLREa 26
+#define eDLREa 27
+#define eGLREb 28
+#define eDLREb 29
 
-#define eLRBS 15
-#define eSMS 16
-#define eLREaS 17
-#define eLREbS 18
+#define eLRBS 30
+#define eSMS 31
+#define eLREaS 32
+#define eLREbS 33
 
-#define ledUn 19
-#define ledDeux 20
-#define ledTrois 21
-#define ledQuatre 22
+#define ledUn 34
+#define ledDeux 35
+#define ledTrois 36
+#define ledQuatre 37
 
-#define signalOne 23
-#define signalTwo 24
-#define signalThree 25
-#define signalFor 26
+#define signalOne 38
+#define signalTwo 39
+#define signalThree 40
+#define signalFor 41
 
 
 
