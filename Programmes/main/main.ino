@@ -19,7 +19,7 @@
 
 #define signalOne 38      //
 #define signalTwo 39      //  Pins reading
-#define signalThree 40    //  signal choice 
+#define signalThree 40    //  signal choice   
 #define signalFor 41      //
 
 #define cSignalOne 42     //
