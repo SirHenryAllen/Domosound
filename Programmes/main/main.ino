@@ -27,6 +27,11 @@
 #define cSignalThree 44   //  signal choice
 #define cSignalFor 45     //
 
+#define sLedOne 31
+#define sLedTwo 32
+#define sLedThree 33
+#define sLedFor 34
+
 
 int bOne = 0;
 int bTwo = 0;
@@ -38,7 +43,7 @@ int sTwo = 0;
 int sThree = 0;
 int sFor = 0;
 
-int sData;
+unsigned char sData;
 
 void setup() {
   
@@ -70,6 +75,11 @@ void setup() {
   pinMode(cSignalTwo, OUTPUT);
   pinMode(cSignalThree, OUTPUT);
   pinMode(cSignalFor, OUTPUT);
+
+  pinMode(sLedOne, OUTPUT);
+  pinMode(sLedTwo, OUTPUT);
+  pinMode(sLedThree, OUTPUT);
+  pinMode(sLedFor, OUTPUT);
   
   Serial.begin(9600);
   
@@ -78,7 +88,7 @@ void setup() {
 void loop() {
 
   speakersCom();
-  speakersGroup();
+  signall();
 
 }
 
@@ -114,51 +124,149 @@ void speakersCom() {
 
   if (bOne == 1) {
     digitalWrite(eGLRB, HIGH);
-    digitalWrite(eDLRB, HIGH);
+    digitalWrite(eDLRB, HIGH); 
     digitalWrite(ledOne, HIGH);
+    Serial.println("Ground floor living room speakers : ON");
   }
   if (bTwo == 1) {
     digitalWrite(eGSM, HIGH);
     digitalWrite(eDSM, HIGH);
     digitalWrite(ledTwo, HIGH);
+    Serial.println("Dining room speakers : ON");
   }
   if (bThree == 1) {
     digitalWrite(eGLREa, HIGH);
     digitalWrite(eDLREa, HIGH);
     digitalWrite(ledThree, HIGH);
+    Serial.println("First floor living room speakers a : ON");
   }
   if (bFor == 1) {
     digitalWrite(eGLREb, HIGH);
     digitalWrite(eDLREb, HIGH);
     digitalWrite(ledFor, HIGH);
+    Serial.println("First floor living room speakers b : ON");
   }
 
   if (bOne == 0) {
     digitalWrite(eGLRB, LOW);
     digitalWrite(eDLRB, LOW);
     digitalWrite(ledOne, LOW);
+    Serial.println("Ground floor living room speakers : OFF");
   }
   if (bTwo == 0) {
     digitalWrite(eGSM, LOW);
     digitalWrite(eDSM, LOW);
     digitalWrite(ledTwo, LOW);
+    Serial.println("Dining room speakers : OFF");
   }
   if (bThree == 0) {
     digitalWrite(eGLREa, LOW);
     digitalWrite(eDLREa, LOW);
     digitalWrite(ledThree, LOW);
+    Serial.println("First floor living room speakers a : OFF");
   }
   if (bFor == 0) {
     digitalWrite(eGLREb, LOW);
     digitalWrite(eDLREb, LOW);
     digitalWrite(ledFor, LOW);
+    Serial.println("First floor living room speakers b : OFF");
   }
   
 }
 
 
-void speakersGroup() {
+void signall() {
 
   sData = Serial.read();
-  
+
+  if (((digitalRead(signalOne)) == 0) or (sData == 5)) {
+    sOne = sOne + 1;
+    if (sOne == 2) {
+      sOne = 0;
+    }
+  }
+   if (((digitalRead(signalTwo)) == 0) or (sData == 6)) {
+    sTwo = sTwo + 1;
+    if (sTwo == 2) {
+      sTwo = 0;
+    }
+  }
+  if (((digitalRead(signalThree)) == 0) or (sData == 7)) {
+    sThree = sThree + 1;
+    if (sThree == 2) {
+      sThree = 0;
+    }
+  }  
+  if (((digitalRead(signalFor)) == 0) or (sData == 8)) {
+    sFor = sFor + 1;
+    if (sFor == 2) {
+      sFor = 0;
+    }
+  }
+
+  if (sOne == 1) {
+    sTwo = 0;
+    sThree = 0;
+    sFor = 0;
+  }
+  if (sTwo == 1) {
+    sOne = 0;
+    sThree = 0;
+    sFor = 0;
+  }
+  if (sThree == 1) {
+    sOne = 0;
+    sTwo = 0;
+    sFor = 0;
+  }
+  if (sFor == 1) {
+    sOne = 0;
+    sTwo = 0;
+    sThree = 0;
+  }
+
+  if (sOne == 1) {
+    digitalWrite(cSignalOne, HIGH);
+    digitalWrite(cSignalTwo, LOW);
+    digitalWrite(cSignalThree, LOW);
+    digitalWrite(cSignalFor, LOW);
+    
+    digitalWrite(sLedOne, HIGH);
+    digitalWrite(sLedTwo, LOW);
+    digitalWrite(sLedThree, LOW);
+    digitalWrite(sLedFor, LOW);
+  }
+  if (sTwo == 1) {
+    digitalWrite(cSignalOne, LOW);
+    digitalWrite(cSignalTwo, HIGH);
+    digitalWrite(cSignalThree, LOW);
+    digitalWrite(cSignalFor, LOW);
+    
+    digitalWrite(sLedOne, LOW);
+    digitalWrite(sLedTwo, HIGH);
+    digitalWrite(sLedThree, LOW);
+    digitalWrite(sLedFor, LOW);
+  }
+  if (sThree == 1) {
+    digitalWrite(cSignalOne, LOW);
+    digitalWrite(cSignalTwo, LOW);
+    digitalWrite(cSignalThree, HIGH);
+    digitalWrite(cSignalFor, LOW);
+
+    digitalWrite(sLedOne, LOW);
+    digitalWrite(sLedTwo, LOW);
+    digitalWrite(sLedThree, HIGH);
+    digitalWrite(sLedFor, LOW);
+  }
+  if (sFor == 1) {
+    digitalWrite(cSignalOne, LOW);
+    digitalWrite(cSignalTwo, LOW);
+    digitalWrite(cSignalThree, LOW);
+    digitalWrite(cSignalFor, HIGH);
+
+    digitalWrite(sLedOne, LOW);
+    digitalWrite(sLedTwo, LOW);
+    digitalWrite(sLedThree, LOW);
+    digitalWrite(sLedFor, HIGH);
+  }
 }
