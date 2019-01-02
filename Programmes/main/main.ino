@@ -66,10 +66,10 @@ void setup() {
   pinMode(ledThree, OUTPUT);
   pinMode(ledFor, OUTPUT);
 
-  pinMode(signalOne, INPUT);
-  pinMode(signalTwo, INPUT);
-  pinMode(signalThree, INPUT);
-  pinMode(signalFor, INPUT);
+  pinMode(signalOne, INPUT_PULLUP);
+  pinMode(signalTwo, INPUT_PULLUP);
+  pinMode(signalThree, INPUT_PULLUP);
+  pinMode(signalFor, INPUT_PULLUP);
 
   pinMode(cSignalOne, OUTPUT);
   pinMode(cSignalTwo, OUTPUT);
