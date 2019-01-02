@@ -12,17 +12,15 @@
 #define eLREaS 32     //  speakers groups
 #define eLREbS 33     //
 
-<<<<<<< HEAD
 #define ledOne 34     //
 #define ledTwo 35     //  Pins LEDs 
 #define ledThree 36   //  speaakers groupes
 #define ledFor 37     //
-=======
+
 #define ledOne 19     //
 #define ledTwo 20     //  Pins LEDs 
 #define ledThree 21   //  speakers groupes
 #define ledFor 22     //
->>>>>>> mainProgramme
 
 #define signalOne 38      //
 #define signalTwo 39      //  Pins reading
