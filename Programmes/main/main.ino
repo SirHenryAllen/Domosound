@@ -12,10 +12,17 @@
 #define eLREaS 32     //  speakers groups
 #define eLREbS 33     //
 
+<<<<<<< HEAD
 #define ledOne 34     //
 #define ledTwo 35     //  Pins LEDs 
 #define ledThree 36   //  speaakers groupes
 #define ledFor 37     //
+=======
+#define ledOne 19     //
+#define ledTwo 20     //  Pins LEDs 
+#define ledThree 21   //  speakers groupes
+#define ledFor 22     //
+>>>>>>> mainProgramme
 
 #define signalOne 38      //
 #define signalTwo 39      //  Pins reading
@@ -27,10 +34,10 @@
 #define cSignalThree 44   //  signal choice
 #define cSignalFor 45     //
 
-#define sLedOne 31
-#define sLedTwo 32
-#define sLedThree 33
-#define sLedFor 34
+#define sLedOne 31        //
+#define sLedTwo 32        //  Pins LEDs
+#define sLedThree 33      //  signal
+#define sLedFor 34        //
 
 
 int bOne = 0;
@@ -235,6 +242,8 @@ void signall() {
     digitalWrite(sLedTwo, LOW);
     digitalWrite(sLedThree, LOW);
     digitalWrite(sLedFor, LOW);
+
+    Serial.println("Signal One : Reading");
   }
   if (sTwo == 1) {
     digitalWrite(cSignalOne, LOW);
@@ -246,6 +255,8 @@ void signall() {
     digitalWrite(sLedTwo, HIGH);
     digitalWrite(sLedThree, LOW);
     digitalWrite(sLedFor, LOW);
+
+    Serial.println("Signal Two : Reading");
   }
   if (sThree == 1) {
     digitalWrite(cSignalOne, LOW);
@@ -257,6 +268,8 @@ void signall() {
     digitalWrite(sLedTwo, LOW);
     digitalWrite(sLedThree, HIGH);
     digitalWrite(sLedFor, LOW);
+
+    Serial.println("Signal Three : Reading");
   }
   if (sFor == 1) {
     digitalWrite(cSignalOne, LOW);
@@ -268,5 +281,24 @@ void signall() {
     digitalWrite(sLedTwo, LOW);
     digitalWrite(sLedThree, LOW);
     digitalWrite(sLedFor, HIGH);
+
+    Serial.println("Signal For : Reading");
+  }
+
+  if (sOne == 0) {
+    digitalWrite(cSignalOne, LOW);
+    digitalWrite(sLedOne, LOW);
+  }
+  if (sTwo == 0) {
+    digitalWrite(cSignalTwo, LOW);
+    digitalWrite(sLedTwo, LOW);
+  }
+  if (sThree == 0) {
+    digitalWrite(cSignalThree, LOW);
+    digitalWrite(sLedThree, LOW);
+  }
+  if (sFor == 0) {
+    digitalWrite(cSignalFor, LOW);
+    digitalWrite(sLedFor, LOW);
   }
 }
