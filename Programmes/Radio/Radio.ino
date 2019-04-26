@@ -1,5 +1,6 @@
 #include <Wire.h>
 #include <TEA5767Radio.h>
+#include <EEPROM.h>
 
 TEA5767Radio radio = TEA5767Radio();
 
@@ -11,6 +12,7 @@ float freq;
 float oldPFreq;
 float oldSData;
 float favo [10];
+int adresse = 0;
 
 int t = 0;
 
@@ -19,6 +21,7 @@ void setup() {
   pinMode(pFreq, INPUT);
   pinMode(fav, INPUT_PULLUP);
   
+  EEPROM.put(0, adresse++);
   Wire.begin();
   Serial.begin(9600);
   
@@ -30,7 +33,8 @@ void loop() {
   potar();
   serial(); 
   radio.setFrequency(freq);
-  favorite();
+  addFav();
+  getFav(2);
   
 }
 
@@ -59,10 +63,16 @@ void serial() {
 }
 
 
-void favorite() {
+void addFav() {
 
-  if ((digitalRead(fav)) == 0) {
-      favo[t] = freq;
-      t = t+1;
-  }
+  if (digitalRead(fav)) {
+      EEPROM.put(adresse++, freq);
+  } 
+}
+
+void getFav(int x) {
+
+   float val;
+   EEPROM.get(x, val);
+   freq = val;
 }
