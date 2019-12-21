@@ -1,54 +1,51 @@
 #define rdcUnG 22       //
 #define rdcUnD 23       //
 #define rdcDeuxG 24        //
-#define rdcDeuxD 25       //  Sound output
-#define etageUnG 26     //      pins
+#define rdcDeuxD 25       //  Pins sortie
+#define etageUnG 26     //      son
 #define etageUnD 27     //
 #define etageDeuxG 28     //
 #define etageDeuxD 29     //
 
 #define rdcUn 30      //
-#define rdcDeux 31       //  Reading pins 
-#define etageUn 32     //  speakers groups
+#define rdcDeux 31       //  lecture pins
+#define etageUn 32     //  groupe d'enceintes
 #define etageDeux 33     //
 
-#define ledOne 34     //
-#define ledTwo 35     //  Pins LEDs 
-#define ledThree 36   //  speaakers groupes
-#define ledFor 37     //
-
-#define ledOne 19     //
-#define ledTwo 20     //  Pins LEDs 
-#define ledThree 21   //  speakers groupes
-#define ledFor 22     //
-
 #define signalOne 38      //
-#define signalTwo 39      //  Pins reading
-#define signalThree 40    //  signal choice   
+#define signalTwo 39      //  Pins lecture
+#define signalThree 40    //  choix signal   
 #define signalFor 41      //
 
 #define cSignalOne 42     //
-#define cSignalTwo 43     //  Pins command
-#define cSignalThree 44   //  signal choice
+#define cSignalTwo 43     //  Pins commande
+#define cSignalThree 44   //  choix signal
 #define cSignalFor 45     //
 
 #define cLedOne 31        //
 #define cLedTwo 32        //  Pins LEDs
-#define cLedThree 33      //  signal choice
+#define cLedThree 33      //  choix signal
 #define cLedFor 34        //
 
-#define oLedOne 35
-#define oLedTwo 36
-#define oLedThree 37
-#define oLedFor 38
+#define oLedOne 35        //
+#define oLedTwo 36        //  Pins LEDs
+#define oLedThree 37      //  enceintes témoin
+#define oLedFor 38        //
+
+#define relaisJack 39
+#define switchJack 40
+#define cBluetooth 41
 
 boolean debug = 0;
 
 boolean signalOutput[4]; 
 boolean ledOutput[4];
 boolean ledInput[4];
+boolean jackState;
 
 char sData;
+
+String b = "";
 
 void setup() {
   pinMode(rdcUnG, OUTPUT);
@@ -64,11 +61,6 @@ void setup() {
   pinMode(rdcDeux, INPUT_PULLUP);
   pinMode(etageUn, INPUT_PULLUP);
   pinMode(etageDeux, INPUT_PULLUP);
-
-  pinMode(ledOne, OUTPUT);
-  pinMode(ledTwo, OUTPUT);
-  pinMode(ledThree, OUTPUT);
-  pinMode(ledFor, OUTPUT);
 
   pinMode(signalOne, INPUT_PULLUP);
   pinMode(signalTwo, INPUT_PULLUP);
@@ -90,6 +82,11 @@ void setup() {
   pinMode(oLedThree, OUTPUT);
   pinMode(oLedFor, OUTPUT);
   
+  pinMode(relaisJack, OUTPUT);
+  pinMode(switchJack, INPUT);
+  pinMode(cBluetooth, OUTPUT);
+
+  
   Serial.begin(9600);
   sData = Serial.read();
 
@@ -100,11 +97,67 @@ void setup() {
 void loop() {
   
   sData = Serial.read();
-  
+    
   checkOutput();
   checkInput();
   checkLedOutput();
   checkLedInput();
+  checkJackState();
+  checkBluetooth();
+   
+}
+
+void checkBluetooth() {
+  
+  if (sData == 'o') {
+    Serial.println("Activation bluetooth");
+    digitalWrite(cBluetooth, HIGH);
+    delay(5000);
+    b = "bluetooth activé";
+    Serial.println("Cooldown");
+    digitalWrite(cBluetooth, LOW);
+    delay(3000);
+  }
+  if (sData == 'e') {
+    Serial.println("Extinction bluetooth");
+    digitalWrite(cBluetooth, HIGH);
+    delay(3000);
+    b = "bluetooth désactivé";
+    Serial.println("Cooldown");
+    digitalWrite(cBluetooth, LOW);
+    delay(3000);
+  }
+  if (sData == 'a') {
+    Serial.println("Appairage bluetooth");
+    digitalWrite(cBluetooth, HIGH) {
+    delay(7000);
+    Serial.println("Cooldown");
+    digitalWrite(cBluetooth, LOW);
+    delay(3000);
+    }
+  }
+  
+}
+
+void checkJackState() {
+  if (sData == '/' /* or digitalRead(switchJack) */) {
+    if (jackState) {
+      jackState = false;
+    } else {
+        jackState = true;
+    }
+    appliJackState();
+  }
+}
+
+void appliJackState() {
+  if (jackState) {
+    digitalWrite(relaisJack, HIGH); 
+    Serial.println("Port jack rdc : entree");
+  } else {
+      digitalWrite(relaisJack, LOW);
+      Serial.println("Port jack rdc : sortie");
+  }
 }
 
 void checkLedOutput() {
@@ -112,22 +165,22 @@ void checkLedOutput() {
   if (ledOutput[0]) {
     digitalWrite(oLedOne, HIGH); 
   } else {
-    digitalWrite(oLedOne, LOW);
+      digitalWrite(oLedOne, LOW);
   }
   if (ledOutput[1]) {
     digitalWrite(oLedTwo, HIGH); 
   } else {
-    digitalWrite(oLedTwo, LOW);
-  }
+      digitalWrite(oLedTwo, LOW);
+  } 
   if (ledOutput[2]) {
     digitalWrite(oLedThree, HIGH); 
   } else {
-    digitalWrite(oLedThree, LOW);
+      digitalWrite(oLedThree, LOW);
   }
   if (ledOutput[3]) {
     digitalWrite(oLedFor, HIGH); 
   } else {
-    digitalWrite(oLedFor, LOW);
+      digitalWrite(oLedFor, LOW);
   }
 }
 
@@ -135,22 +188,22 @@ void checkLedInput() {
   if (ledInput[0]) {
     digitalWrite(cLedOne, HIGH); 
   } else {
-    digitalWrite(cLedOne, LOW);
+      digitalWrite(cLedOne, LOW);
   }
   if (ledInput[1]) {
     digitalWrite(cLedTwo, HIGH); 
   } else {
-    digitalWrite(cLedTwo, LOW);
+      digitalWrite(cLedTwo, LOW);
   }
   if (ledInput[2]) {
     digitalWrite(cLedThree, HIGH); 
   } else {
-    digitalWrite(cLedThree, LOW);
+      digitalWrite(cLedThree, LOW);
   }
   if (ledInput[3]) {
     digitalWrite(cLedFor, HIGH); 
   } else {
-    digitalWrite(cLedFor, LOW);
+      digitalWrite(cLedFor, LOW);
   } 
 }
 
