@@ -1,36 +1,40 @@
-#define rdcUnG 22       //
-#define rdcUnD 23       //
+#define rdcUnG 22          //
+#define rdcUnD 23          //
 #define rdcDeuxG 24        //
-#define rdcDeuxD 25       //  Pins sortie
-#define etageUnG 26     //      son
-#define etageUnD 27     //
-#define etageDeuxG 28     //
-#define etageDeuxD 29     //
+#define rdcDeuxD 25        //  Pins sortie
+#define etageUnG 26        //      son
+#define etageUnD 27        //
+#define etageDeuxG 28      //
+#define etageDeuxD 29      //
 
-#define rdcUn 30      //
-#define rdcDeux 31       //  lecture pins
-#define etageUn 32     //  groupe d'enceintes
-#define etageDeux 33     //
+#define rdcUn 30           //
+#define rdcDeux 31         //  lecture pins
+#define etageUn 32         //  groupe d'enceintes
+#define etageDeux 33       //
 
-#define signalOne 38      //
-#define signalTwo 39      //  Pins lecture
-#define signalThree 40    //  choix signal   
-#define signalFor 41      //
+#define signalOne 38       //
+#define signalTwo 39       //  Pins lecture
+#define signalThree 40     //  choix signal   
+#define signalFor 41       //
 
-#define cSignalOne 42     //
-#define cSignalTwo 43     //  Pins commande
-#define cSignalThree 44   //  choix signal
-#define cSignalFor 45     //
+#define cSignalOneR 53     //
+#define cSignalTwoR 52     //  
+#define cSignalThreeR 51   //  
+#define cSignalForR 50     //  Pins commande
+#define cSignalOneL 7      //  choix signal
+#define cSignalTwoL 6      //
+#define cSignalThreeL 5    //
+#define cSignalForL 4      //
 
-#define cLedOne 31        //
-#define cLedTwo 32        //  Pins LEDs
-#define cLedThree 33      //  choix signal
-#define cLedFor 34        //
+#define cLedOne 31         //
+#define cLedTwo 32         //  Pins LEDs
+#define cLedThree 33       //  choix signal
+#define cLedFor 34         //
 
-#define oLedOne 35        //
-#define oLedTwo 36        //  Pins LEDs
-#define oLedThree 37      //  enceintes témoin
-#define oLedFor 38        //
+#define oLedOne 35         //
+#define oLedTwo 36         //  Pins LEDs
+#define oLedThree 37       //  enceintes témoin
+#define oLedFor 38         //
 
 #define relaisJack 39
 #define switchJack 40
@@ -67,10 +71,14 @@ void setup() {
   pinMode(signalThree, INPUT_PULLUP);
   pinMode(signalFor, INPUT_PULLUP);
 
-  pinMode(cSignalOne, OUTPUT);
-  pinMode(cSignalTwo, OUTPUT);
-  pinMode(cSignalThree, OUTPUT);
-  pinMode(cSignalFor, OUTPUT);
+  pinMode(cSignalOneR, OUTPUT);
+  pinMode(cSignalTwoR, OUTPUT);
+  pinMode(cSignalThreeR, OUTPUT);
+  pinMode(cSignalForR, OUTPUT);
+  pinMode(cSignalOneL, OUTPUT);
+  pinMode(cSignalTwoL, OUTPUT);
+  pinMode(cSignalThreeL, OUTPUT);
+  pinMode(cSignalForL, OUTPUT);  
 
   pinMode(cLedOne, OUTPUT);
   pinMode(cLedTwo, OUTPUT);
@@ -92,19 +100,6 @@ void setup() {
 
   Serial.println("Check serial");
 
-}
-
-void loop() {
-  
-  sData = Serial.read();
-    
-  checkOutput();
-  checkInput();
-  checkLedOutput();
-  checkLedInput();
-  checkJackState();
-  checkBluetooth();
-   
 }
 
 void checkBluetooth() {
@@ -129,15 +124,13 @@ void checkBluetooth() {
   }
   if (sData == 'a') {
     Serial.println("Appairage bluetooth");
-    digitalWrite(cBluetooth, HIGH) {
+    digitalWrite(cBluetooth, HIGH);
     delay(7000);
     Serial.println("Cooldown");
     digitalWrite(cBluetooth, LOW);
     delay(3000);
     }
   }
-  
-}
 
 void checkJackState() {
   if (sData == '/' /* or digitalRead(switchJack) */) {
@@ -209,11 +202,16 @@ void checkLedInput() {
 
 void checkInput() {
   
-  if (/* digitalRead(signalOne) or */ sData == '5') {
-    digitalWrite(cSignalOne, HIGH);
-    digitalWrite(cSignalTwo, LOW);  
-    digitalWrite(cSignalThree, LOW);
-    digitalWrite(cSignalFor, LOW);
+  if (/* (digitalRead(signalOne)) == 1 or */ sData == '5') {
+    digitalWrite(cSignalOneR, HIGH);
+    digitalWrite(cSignalTwoR, LOW);  
+    digitalWrite(cSignalThreeR, LOW);
+    digitalWrite(cSignalForR, LOW);
+    //
+    digitalWrite(cSignalOneL, HIGH);
+    digitalWrite(cSignalTwoL, LOW);  
+    digitalWrite(cSignalThreeL, LOW);
+    digitalWrite(cSignalForL, LOW);    
     ledInput[0] = 1;
     ledInput[1] = 0;
     ledInput[2] = 0;
@@ -224,11 +222,16 @@ void checkInput() {
     Serial.println("Signal d'entree quatre : 0");
     Serial.println("----------------------------------");
   }
-  if (/* digitalRead(signalTwo) or */ sData == '6') {
-    digitalWrite(cSignalOne, LOW);
-    digitalWrite(cSignalTwo, HIGH);  
-    digitalWrite(cSignalThree, LOW);
-    digitalWrite(cSignalFor, LOW);
+  if (/* (digitalRead(signalTwo)) == 1 or */ sData == '6') {
+    digitalWrite(cSignalOneR, LOW);
+    digitalWrite(cSignalTwoR, HIGH);  
+    digitalWrite(cSignalThreeR, LOW);
+    digitalWrite(cSignalForR, LOW);
+    //
+    digitalWrite(cSignalOneL, LOW);
+    digitalWrite(cSignalTwoL, HIGH);  
+    digitalWrite(cSignalThreeL, LOW);
+    digitalWrite(cSignalForL, LOW);
     ledInput[0] = 0;
     ledInput[1] = 1;
     ledInput[2] = 0;
@@ -239,11 +242,16 @@ void checkInput() {
     Serial.println("Signal d'entree quatre : 0");
     Serial.println("----------------------------------");
   }
-  if (/* digitalRead(signalThree) or */ sData == '7') {
-    digitalWrite(cSignalOne, LOW);
-    digitalWrite(cSignalTwo, LOW);  
-    digitalWrite(cSignalThree, HIGH);
-    digitalWrite(cSignalFor, LOW);
+  if (/* (digitalRead(signalThree)= == 1 or */ sData == '7') {
+    digitalWrite(cSignalOneR, LOW);
+    digitalWrite(cSignalTwoR, LOW);  
+    digitalWrite(cSignalThreeR, HIGH);
+    digitalWrite(cSignalForR, LOW);
+    //
+    digitalWrite(cSignalOneL, LOW);
+    digitalWrite(cSignalTwoL, LOW);  
+    digitalWrite(cSignalThreeL, HIGH);
+    digitalWrite(cSignalForL, LOW);
     ledInput[0] = 0;
     ledInput[1] = 0;
     ledInput[2] = 1;
@@ -254,11 +262,16 @@ void checkInput() {
     Serial.println("Signal d'entree quatre : 0");
     Serial.println("----------------------------------");
   }
-  if (/* digitalRead(signalFor) or */ sData == '8') {
-    digitalWrite(cSignalOne, LOW);
-    digitalWrite(cSignalTwo, LOW);  
-    digitalWrite(cSignalThree, LOW);
-    digitalWrite(cSignalFor, HIGH);
+  if (/* (digitalRead(signalFor)) == 1  or */ sData == '8') {
+    digitalWrite(cSignalOneR, LOW);
+    digitalWrite(cSignalTwoR, LOW);  
+    digitalWrite(cSignalThreeR, LOW);
+    digitalWrite(cSignalForR, HIGH);
+    //
+    digitalWrite(cSignalOneL, LOW);
+    digitalWrite(cSignalTwoL, LOW);  
+    digitalWrite(cSignalThreeL, LOW);
+    digitalWrite(cSignalForL, HIGH);
     ledInput[0] = 0;
     ledInput[1] = 0;
     ledInput[2] = 0;
@@ -352,4 +365,17 @@ void appliOutput() {
       digitalWrite(etageDeuxD, LOW);
   }
   Serial.println("----------------------------------");
+}
+
+void loop() {
+  
+  sData = Serial.read();
+  
+  checkOutput();
+  checkInput();
+  checkLedOutput();
+  checkLedInput();
+  checkJackState();
+  checkBluetooth();
+   
 }
