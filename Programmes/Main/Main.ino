@@ -7,20 +7,20 @@
 #define etageDeuxG 28      //
 #define etageDeuxD 29      //
 
-#define rdcUn 30           //
-#define rdcDeux 31         //  lecture pins
-#define etageUn 32         //  groupe d'enceintes
-#define etageDeux 33       //
+#define rdcUn 44           //
+#define rdcDeux 45         //  lecture pins
+#define etageUn 42         //  groupe d'enceintes
+#define etageDeux 43       //
 
-#define signalOne 38       //
-#define signalTwo 39       //  Pins lecture
-#define signalThree 40     //  choix signal   
-#define signalFor 41       //
+#define signalOne 48       //
+#define signalTwo 49       //  Pins lecture
+#define signalThree 46     //  choix signal   
+#define signalFor 47       //
 
-#define cSignalOneR 53     //
-#define cSignalTwoR 52     //  
-#define cSignalThreeR 51   //  
-#define cSignalForR 50     //  Pins commande
+#define cSignalOneR 50     //
+#define cSignalTwoR 51     //  
+#define cSignalThreeR 52   //  
+#define cSignalForR 53     //  Pins commande
 #define cSignalOneL 7      //  choix signal
 #define cSignalTwoL 6      //
 #define cSignalThreeL 5    //
@@ -108,7 +108,7 @@ void checkBluetooth() {
     Serial.println("Activation bluetooth");
     digitalWrite(cBluetooth, HIGH);
     delay(5000);
-    b = "bluetooth activé";
+    b = "bluetooth activé"; 
     Serial.println("Cooldown");
     digitalWrite(cBluetooth, LOW);
     delay(3000);
